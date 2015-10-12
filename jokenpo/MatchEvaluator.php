@@ -5,7 +5,7 @@ class MatchEvaluator
     protected $playerOne;
     protected $playerTwo;
 
-    public function __construct(Player $playerOne, Player $playerTwo)
+    public function __construct(RealPlayer $playerOne, RealPlayer $playerTwo)
     {
         $this->playerOne = $playerOne;
         $this->playerTwo = $playerTwo;
@@ -22,7 +22,7 @@ class MatchEvaluator
         $playerTwoMoveName = $this->playerTwo->getMove()->getMoveName();
 
         if ($playerOneMoveName === $playerTwoMoveName) {
-            return null;
+            return new NoPlayer();
         }
 
         if ($playerOneMoveName === 'rock' && $playerTwoMoveName === 'scissors')

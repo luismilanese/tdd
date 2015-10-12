@@ -1,7 +1,8 @@
 <?php
 
 require_once '../MatchEvaluator.php';
-require_once '../Player.php';
+require_once '../RealPlayer.php';
+require_once '../NoPlayer.php';
 require_once '../Move.php';
 
 class MatchEvaluatorTest extends PHPUnit_Framework_TestCase
@@ -12,8 +13,8 @@ class MatchEvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->playerOne = new Player('Luis', new Move('rock'));
-        $this->playerTwo = new Player('Milanese', new Move('paper'));
+        $this->playerOne = new RealPlayer('Luis', new Move('rock'));
+        $this->playerTwo = new RealPlayer('Milanese', new Move('paper'));
 
         $this->matchEvaluator = new MatchEvaluator($this->playerOne, $this->playerTwo);
     }
@@ -32,7 +33,7 @@ class MatchEvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testRockBeatsScissors()
     {
-        $matchEvaluator = new MatchEvaluator(new Player('Harry', new Move('rock')), new Player('Houdini', new Move('scissors')));
+        $matchEvaluator = new MatchEvaluator(new RealPlayer('Harry', new Move('rock')), new RealPlayer('Houdini', new Move('scissors')));
         $winner = $matchEvaluator->play();
 
         $this->assertEquals('Harry', $winner->getName());
@@ -40,7 +41,7 @@ class MatchEvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testScissorsBeatsPaper()
     {
-        $matchEvaluator = new MatchEvaluator(new Player('Harry', new Move('paper')), new Player('Houdini', new Move('scissors')));
+        $matchEvaluator = new MatchEvaluator(new RealPlayer('Harry', new Move('paper')), new RealPlayer('Houdini', new Move('scissors')));
         $winner = $matchEvaluator->play();
 
         $this->assertEquals('Houdini', $winner->getName());
@@ -48,7 +49,7 @@ class MatchEvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testPaperBeatsRock()
     {
-        $matchEvaluator = new MatchEvaluator(new Player('Harry', new Move('paper')), new Player('Houdini', new Move('rock')));
+        $matchEvaluator = new MatchEvaluator(new RealPlayer('Harry', new Move('paper')), new RealPlayer('Houdini', new Move('rock')));
         $winner = $matchEvaluator->play();
 
         $this->assertEquals('Harry', $winner->getName());
@@ -56,9 +57,9 @@ class MatchEvaluatorTest extends PHPUnit_Framework_TestCase
 
     public function testEqualMovesResultsInDraw()
     {
-        $matchEvaluator = new MatchEvaluator(new Player('Harry', new Move('paper')), new Player('Houdini', new Move('paper')));
+        $matchEvaluator = new MatchEvaluator(new RealPlayer('Harry', new Move('paper')), new RealPlayer('Houdini', new Move('paper')));
         $winner = $matchEvaluator->play();
 
-        $this->assertEquals(null, $winner);
+        $this->assertInstanceOf('NoPlayer', $winner, 'Should be an instance of NoPlayer.');
     }
 }

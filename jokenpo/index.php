@@ -1,7 +1,8 @@
 <?php
 
 require_once 'MatchEvaluator.php';
-require_once 'Player.php';
+require_once 'RealPlayer.php';
+require_once 'NoPlayer.php';
 require_once 'Move.php';
 
 $numberOfMatches = isset($argv[1]) ? (int) $argv[1] : 3;
@@ -14,20 +15,22 @@ $draws = 0;
 for($i = 0; $i < $numberOfMatches; $i++) {
     $randomKey = array_rand($moves, 2);
 
-    $playerOne = new Player("Player One", new Move($moves[rand(0, 2)]));
-    $playerTwo = new Player("Player Two", new Move($moves[rand(0, 2)]));    
+    $playerOne = new RealPlayer("Player One", new Move($moves[rand(0, 2)]));
+    $playerTwo = new RealPlayer("Player Two", new Move($moves[rand(0, 2)]));
 
     $match = new MatchEvaluator($playerOne, $playerTwo);
     $winner = $match->play();
 
-    if ($winner === $playerOne)
+    if ($winner === $playerOne) {
         $playerOneWins++;
-    elseif ($winner === $playerTwo)
-        $playerTwoWins++;
-    else
-        $draws++;
+    }
 
-    if (is_null($winner)) {
+    if ($winner === $playerTwo) {
+        $playerTwoWins++;
+    }
+
+    if (is_a($winner, 'NoPlayer')) {
+        $draws++;
         echo "Draw\n";
         continue;
     }
