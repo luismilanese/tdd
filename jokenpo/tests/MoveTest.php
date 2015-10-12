@@ -1,8 +1,10 @@
 <?php
 
-require_once '../Move.php';
+namespace App\Tests;
 
-class MoveTest extends PHPUnit_Framework_TestCase
+use App\Move;
+
+class MoveTest extends \PHPUnit_Framework_TestCase
 {
     public function testShouldValidateGivenMove()
     {

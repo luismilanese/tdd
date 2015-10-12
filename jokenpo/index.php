@@ -1,9 +1,11 @@
 <?php
 
-require_once 'MatchEvaluator.php';
-require_once 'RealPlayer.php';
-require_once 'NoPlayer.php';
-require_once 'Move.php';
+require_once 'vendor/autoload.php';
+
+use App\RealPlayer;
+use App\NoPlayer;
+use App\Move;
+use App\MatchEvaluator;
 
 $numberOfMatches = isset($argv[1]) ? (int) $argv[1] : 3;
 $moves = ['rock', 'scissors', 'paper'];
@@ -29,7 +31,7 @@ for($i = 0; $i < $numberOfMatches; $i++) {
         $playerTwoWins++;
     }
 
-    if (is_a($winner, 'NoPlayer')) {
+    if (is_a($winner, 'App\NoPlayer')) {
         $draws++;
         echo "Draw\n";
         continue;

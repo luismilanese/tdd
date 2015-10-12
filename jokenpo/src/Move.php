@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 class Move
 {
     private $avaliableMoves = ['scissors', 'rock', 'paper'];
@@ -9,7 +11,7 @@ class Move
     {
         $moveName = strtolower($moveName);
         if (!in_array($moveName, $this->avaliableMoves)) {
-            throw new InvalidArgumentException("Move should be: scissors, rock or paper. Value given = " . $moveName);
+            throw new \InvalidArgumentException("Move should be: scissors, rock or paper. Value given = " . $moveName);
         }
         $this->moveName = $moveName;
     }

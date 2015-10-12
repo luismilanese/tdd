@@ -1,11 +1,13 @@
 <?php
 
-require_once '../MatchEvaluator.php';
-require_once '../RealPlayer.php';
-require_once '../NoPlayer.php';
-require_once '../Move.php';
+namespace App\Tests;
 
-class MatchEvaluatorTest extends PHPUnit_Framework_TestCase
+use App\MatchEvaluator;
+use App\RealPlayer;
+use App\NoPlayer;
+use App\Move;
+
+class MatchEvaluatorTest extends \PHPUnit_Framework_TestCase
 {
     private $matchEvaluator;
     private $playerOne;
@@ -60,6 +62,6 @@ class MatchEvaluatorTest extends PHPUnit_Framework_TestCase
         $matchEvaluator = new MatchEvaluator(new RealPlayer('Harry', new Move('paper')), new RealPlayer('Houdini', new Move('paper')));
         $winner = $matchEvaluator->play();
 
-        $this->assertInstanceOf('NoPlayer', $winner, 'Should be an instance of NoPlayer.');
+        $this->assertInstanceOf('App\NoPlayer', $winner, 'Should be an instance of NoPlayer.');
     }
 }

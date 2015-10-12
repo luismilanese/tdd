@@ -1,9 +1,11 @@
 <?php
 
-require '../RealPlayer.php';
-require '../Move.php';
+namespace App\Tests;
 
-class RealPlayerTest extends PHPUnit_Framework_TestCase
+use App\RealPlayer;
+use App\Move;
+
+class RealPlayerTest extends \PHPUnit_Framework_TestCase
 {
     private $playerLuis;
     private $moveRock;
@@ -22,6 +24,6 @@ class RealPlayerTest extends PHPUnit_Framework_TestCase
 
     public function testRealPlayerShouldBeAPlayer()
     {
-        $this->assertInstanceOf('Player', $this->playerLuis);
+        $this->assertInstanceOf('App\Player', $this->playerLuis);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Player.php';
+namespace App;
 
 class RealPlayer implements Player
 {

@@ -1,9 +1,11 @@
 <?php
 
-require_once '../NoPlayer.php';
-require_once '../Player.php';
+namespace App\Tests;
 
-class NoPlayerTest extends PHPUnit_Framework_TestCase
+use App\NoPlayer;
+use App\Player;
+
+class NoPlayerTest extends \PHPUnit_Framework_TestCase
 {
     private $noPlayer;
 
@@ -30,6 +32,6 @@ class NoPlayerTest extends PHPUnit_Framework_TestCase
 
     public function testNoPlayerShouldBeAPlayer()
     {
-        $this->assertInstanceOf('Player', $this->noPlayer);
+        $this->assertInstanceOf('App\Player', $this->noPlayer);
     }
 }
